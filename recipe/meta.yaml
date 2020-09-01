@@ -1,0 +1,38 @@
+{% set name = "unyt" %}
+{% set version = "2.7.2" %}
+{% set sha256 = "498efe0c24c3b137ab6cf79e8abb5fa5297f76e882ef0ac99cdb57d0280d0a5e" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  noarch: python
+  number: 0
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
+
+requirements:
+  host:
+    - python >=3.5
+    - pip
+  run:
+    - python >=3.5
+    - numpy >=1.13
+    - sympy
+
+test:
+  imports:
+    - unyt
+
+about:
+  home: http://github.com/yt-project/unyt
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: Handle, manipulate, and convert data with units in Python
+  doc_url: http://unyt.readthedocs.io/
+  dev_url: https://github.com/yt-project/unyt
